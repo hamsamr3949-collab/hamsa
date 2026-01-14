@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hamsa M R | Full Stack Developer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#38bdf8;
+  --glass:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.18);
+  --dark:#020617;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+html,body{
+  font-family:'Poppins',sans-serif;
+  background:var(--dark);
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* CANVAS */
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+}
+
+/* PARALLAX GLOW */
+.parallax{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%,#38bdf825,transparent 40%),
+    radial-gradient(circle at 80% 70%,#2563eb25,transparent 40%);
+  z-index:-1;
+}
+
+/* NAV */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:15px 10%;
+  display:flex;
+  justify-content:flex-end;
+  gap:25px;
+  backdrop-filter:blur(12px);
+  background:rgba(2,6,23,.6);
+  z-index:1000;
+}
+
+nav a{
+  color:#fff;
+  text-decoration:none;
+  transition:.3s;
+}
+nav a:hover{color:var(--primary)}
+
+/* PAGE SYSTEM */
+.page{
+  min-height:100vh;
+  padding:120px 10% 80px;
+  display:none;
+  animation:page .8s ease;
+}
+.page.active{display:block}
+
+@keyframes page{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.hero h1{font-size:3.2rem}
+.hero span{color:var(--primary)}
+
+.typing{
+  font-family:'Fira Code',monospace;
+  width:26ch;
+  white-space:nowrap;
+  overflow:hidden;
+  border-right:3px solid var(--primary);
+  animation:typing 3s steps(26), blink .5s infinite alternate;
+  color:var(--primary);
+  margin:auto;
+}
+
+@keyframes typing{from{width:0}}
+@keyframes blink{50%{border-color:transparent}}
+
+/* FLOATING ICONS */
+.floating{
+  position:absolute;
+  font-size:2.2rem;
+  animation:float 6s ease-in-out infinite;
+  opacity:.7;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-25px)}
+}
+
+/* TITLES */
+.title{
+  text-align:center;
+  font-size:2.4rem;
+  color:var(--primary);
+  margin-bottom:40px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+
+/* GLASS CARD + 3D */
+.card{
+  background:var(--glass);
+  backdrop-filter:blur(15px);
+  border:1px solid var(--border);
+  padding:25px;
+  border-radius:18px;
+  transition:.3s;
+  transform-style:preserve-3d;
+}
+.card:hover{
+  box-shadow:0 30px 60px #38bdf840;
+}
+
+/* BUTTON */
+.btn{
+  display:inline-block;
+  margin-top:25px;
+  padding:12px 32px;
+  border-radius:30px;
+  background:linear-gradient(90deg,#2563eb,#38bdf8);
+  color:#fff;
+  text-decoration:none;
+  transition:.3s;
+}
+.btn:hover{
+  transform:translateY(-4px) scale(1.05);
+  box-shadow:0 0 25px var(--primary);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:30px;
+  color:#94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+<div class="parallax"></div>
+
+<nav>
+  <a onclick="go('home')">Home</a>
+  <a onclick="go('about')">About</a>
+  <a onclick="go('skills')">Skills</a>
+  <a onclick="go('projects')">Projects</a>
+  <a onclick="go('contact')">Contact</a>
+</nav>
+
+<!-- HOME -->
+<div class="page active" id="home">
+  <div class="hero">
+    <div>
+      <h1>Hi, I'm <span>Hamsa M R</span></h1>
+      <h2 class="typing">Full Stack Developer</h2>
+      <p>Computer Science Student | Coder | Problem Solver</p>
+      <a onclick="go('contact')" class="btn">Contact Me</a>
+    </div>
+
+    <div class="floating" style="top:20%;left:15%">⚛️</div>
+    <div class="floating" style="top:60%;left:10%">☕</div>
+    <div class="floating" style="top:30%;right:15%">🛢️</div>
+    <div class="floating" style="top:65%;right:18%">💻</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="about">
+  <h2 class="title">About Me</h2>
+  <p style="max-width:850px;margin:auto;text-align:center">
+    I am a passionate <b>Full Stack Developer</b> who enjoys building
+    modern web applications, scalable backend systems, and interactive
+    user experiences using clean, efficient code.
+  </p>
+</div>
+
+<!-- SKILLS -->
+<div class="page" id="skills">
+  <h2 class="title">Skills</h2>
+  <div class="grid">
+    <div class="card">HTML, CSS, JavaScript</div>
+    <div class="card">React.js</div>
+    <div class="card">Java & Spring Boot</div>
+    <div class="card">MySQL & MongoDB</div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="page" id="projects">
+  <h2 class="title">Projects</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>🎓 LearnLab</h3>
+      <p>Online learning platform with authentication, REST APIs, and modern UI.</p>
+    </div>
+    <div class="card">
+      <h3>🏥 Doctor Appointment System</h3>
+      <p>Admin & Doctor login, appointment booking using Spring Boot.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="contact">
+  <h2 class="title">Contact Me</h2>
+  <p style="text-align:center">
+    📧 <b>hamsamr3949@gmail.com</b><br><br>
+    💼 GitHub: github.com/hamsamr<br>
+    🔗 LinkedIn: linkedin.com/in/hamsa-m-r-027218392
+  </p>
+</div>
+
+<footer>© 2026 Designed & Developed by Hamsa M R</footer>
+
+<script>
+/* PAGE SWITCH */
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+/* PARALLAX */
+window.addEventListener('mousemove',e=>{
+  document.querySelector('.parallax').style.transform=
+    `translate(${e.clientX/100}px,${e.clientY/100}px)`;
+});
+
+/* 3D CARD HOVER */
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=e.clientX-r.left;
+    const y=e.clientY-r.top;
+    card.style.transform=
+      `rotateX(${-(y-r.height/2)/15}deg)
+       rotateY(${(x-r.width/2)/15}deg)`;
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='rotateX(0) rotateY(0)';
+  });
+});
+
+/* 3D PARTICLES */
+const canvas=document.getElementById("particles");
+const c=canvas.getContext("2d");
+let w,h,particles=[];
+function resize(){
+  w=canvas.width=window.innerWidth;
+  h=canvas.height=window.innerHeight;
+}
+window.addEventListener("resize",resize);
+resize();
+
+class Particle{
+  constructor(){
+    this.x=Math.random()*w;
+    this.y=Math.random()*h;
+    this.z=Math.random()*w;
+    this.speed=1;
+  }
+  update(){
+    this.z-=this.speed;
+    if(this.z<=0){this.z=w;this.x=Math.random()*w;this.y=Math.random()*h}
+  }
+  draw(){
+    let sx=(this.x-w/2)*(w/this.z)+w/2;
+    let sy=(this.y-h/2)*(w/this.z)+h/2;
+    let r=w/this.z;
+    c.fillStyle="rgba(56,189,248,0.7)";
+    c.beginPath();
+    c.arc(sx,sy,r,0,Math.PI*2);
+    c.fill();
+  }
+}
+
+for(let i=0;i<300;i++)particles.push(new Particle());
+
+function animate(){
+  c.clearRect(0,0,w,h);
+  particles.forEach(p=>{p.update();p.draw()});
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
